@@ -5,6 +5,10 @@ def get_current_price(ticker):
     stock = yf.Ticker(ticker)
     data = stock.info
     if 'ask' not in data.keys():
+        if 'navPrice' in data.keys():
+            return data['navPrice']
+        if 'currentPrice' in data.keys():
+            return data['currentPrice']
         return "ask not found"
     else:
         return data['ask']
